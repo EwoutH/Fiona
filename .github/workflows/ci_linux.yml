@@ -36,42 +36,48 @@ jobs:
               PROJVERSION: "8.2.0",
               allow_failure: "false",
             }
+          - {
+              python: 3.6,
+              GDALVERSION: "3.4.3",
+              PROJVERSION: "8.2.1",
+              allow_failure: "false",
+            }
 
 
           # Test all supported python versions with latest stable gdal release
           - {
               python: "3.6",
-              GDALVERSION: "3.4.0",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
           - {
               python: "3.7",
-              GDALVERSION: "3.4.0",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
           - {
               python: "3.8",
-              GDALVERSION: "3.4.0",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
           - {
               python: "3.9",
-              GDALVERSION: "3.4.0",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
           - {
               python: "3.10",
-              GDALVERSION: "3.4.0",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
           - {
-              python: "3.10",
-              GDALVERSION: "3.3.3",
+              python: "3.11-dev",
+              GDALVERSION: "3.5.2",
               PROJVERSION: "8.2.1",
               allow_failure: "false",
             }
@@ -102,10 +108,10 @@ jobs:
       TRAVIS_OS_NAME: "linux"
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
@@ -141,13 +147,13 @@ jobs:
           cat $GITHUB_WORKSPACE/apt_list
 
       - name: Cache GDAL binaries
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: gdalinstall
           key: ${{ runner.os }}-gdal-${{ matrix.GDALVERSION }}-proj-${{ matrix.PROJVERSION }}-${{ hashFiles('**/apt_list') }}
 
       - name: Cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}

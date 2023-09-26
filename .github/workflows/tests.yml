@@ -2,17 +2,6 @@ name: Tests
 
 on:
   push:
-    branches: [ master, 'maint-*', 'patch-*' ]
-    paths:
-      - '.github/workflows/tests.yaml'
-      - 'requirements*.txt'
-      - 'setup.py'
-      - 'setup.cfg'
-      - 'MANIFEST.in'
-      - 'pyproject.toml'
-      - 'scripts/**'
-      - 'fiona/**'
-      - 'tests/**'
   pull_request:
     branches: [ master, 'maint-*' ]
     paths:
